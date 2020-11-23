@@ -4,9 +4,9 @@
     <form v-on:submit.prevent="saveNewTodo">
       <label for="new-todo"></label>
       <input id="new-todo" type="text" placeholder="Add new todo to list" v-model="newTodo"/>
-      <input type="radio" id="high" name="priority" value="High" v-model="newPriority"/>
+      <input type="radio" id="high" name="priority" value="High" required v-model="newPriority"/>
       <label for="high">High</label>
-      <input type="radio" id="low" name="priority" value="Low" v-model="newPriority"/>
+      <input type="radio" id="low" name="priority" value="Low" required v-model="newPriority"/>
       <label for="low">Low</label>
       <input type="submit" value="Save new todo"/>
     </form>
@@ -14,7 +14,7 @@
     <ul>
       <li v-for="(todo, index) in todos" v-bind:key="index" v-bind:class="todo.priority ? 'high':'low'">
         <span>{{todo.task}}</span>
-        <span v-if>{{todo.priority}}</span>
+        <span>{{todo.priority}}</span>
         </li>
     </ul>
 
@@ -31,7 +31,8 @@ export default {
               {task: "Water the plants", priority: "High"},
               ],
               // couldn't get it to work without it being an object - todos: ["Walk the dog", "Wash the dishes", "Water the plants"],
-      newTodo: ""
+      newTodo: "",
+      newPriority: ""
     }
   },
   methods: {
@@ -52,11 +53,6 @@ export default {
   font-family: 'Lato', sans-serif;
   width: 60%;
   margin: 0 auto;
-  /* -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px; */
 }
 
 h1 {
@@ -89,14 +85,14 @@ li span {
   cursor: pointer;
 } */
 
-/* li.purchased {
+li.low {
   border: 2px solid #1a681e;
   color: #1a681e;
 }
 
-li.not-purchased {
+li.high {
   border: 2px solid #f2360c;
-} */
+}
 
 input[type="text"] {
   padding: 10px;
